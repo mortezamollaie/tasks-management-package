@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "88970a0117c062eed55fa8728fc43833",
+    "content-hash": "4616b7bd2a26ef1a269ba9c404f846a3",
     "packages": [
         {
             "name": "brick/math",
@@ -2108,6 +2108,39 @@
                 }
             ],
             "time": "2025-03-24T10:02:05+00:00"
+        },
+        {
+            "name": "mortezamollaie/tasks-management",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "packages/mortezamollaie/tasks-management",
+                "reference": "d61e3b5ff205f089af13f2372d2a085186485feb"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Mortezamollaie\\TasksManagement\\TasksManagementServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Mortezamollaie\\TasksManagement\\": "src/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "mortezamollaie",
+                    "email": "mm.gov.1381@gmail.com"
+                }
+            ],
+            "description": "a simple task management system for laravel framework",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "nesbot/carbon",

@@ -1,0 +1,24 @@
+{
+    "name": "mortezamollaie/tasks-management",
+    "description": "a simple task management system for laravel framework",
+    "autoload": {
+        "psr-4": {
+            "Mortezamollaie\\TasksManagement\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "mortezamollaie",
+            "email": "mm.gov.1381@gmail.com"
+        }
+    ],
+    "require": {},
+    "version": "1.0.0",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mortezamollaie\\TasksManagement\\TasksManagementServiceProvider"
+            ]
+        }
+    }
+}
