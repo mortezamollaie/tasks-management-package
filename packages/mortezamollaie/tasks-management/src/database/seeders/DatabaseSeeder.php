@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders;
+namespace Mortezamollaie\TasksManagement\database\seeders;
 
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -13,6 +13,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(\Mortezamollaie\TasksManagement\database\seeders\DatabaseSeeder::class);
+        $this->call(UserSeeder::class);
+        $this->call(RoleSeeder::class);
+        $this->call(PermissionSeeder::class);
+        $this->call(RoleUserSeeder::class);
     }
 }

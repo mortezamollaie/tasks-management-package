@@ -5,9 +5,13 @@ namespace Mortezamollaie\TasksManagement;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Mortezamollaie\TasksManagement\ApiResponse\ApiResponseBuilder;
+use Mortezamollaie\TasksManagement\database\seeders\DatabaseSeeder;
 
 class TasksManagementServiceProvider extends ServiceProvider
 {
+    protected $seed_list = [
+      'Mortezamollaie/TasksManagement/database/seeders/DatabaseSeeder',
+    ];
     public function register()
     {
         $this->app->bind('apiResponse', function () {
@@ -23,5 +27,9 @@ class TasksManagementServiceProvider extends ServiceProvider
             });
 
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+
+        $this->publishes([
+            __DIR__.'/database/seeders' => database_path('seeders'),
+        ], 'seeders');
     }
 }
