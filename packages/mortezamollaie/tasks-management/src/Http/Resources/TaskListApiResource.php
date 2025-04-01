@@ -17,7 +17,8 @@ class TaskListApiResource extends JsonResource
         return [
             'title' => $this->title,
             'due_date' => $this->due_date,
-            'is_completed' => $this->is_completed,
+            'is_completed' => $this->is_completed == 0 ? 'false' : 'true',
+            'is_highlighted' => $this->is_highlighted
         ];
     }
 }

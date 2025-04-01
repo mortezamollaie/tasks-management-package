@@ -13,7 +13,7 @@ class TaskStoreRequest extends ApiFormRequest
      */
     public function authorize(): bool
     {
-        return Gate::allows('task_store');
+        return Gate::allows('create_task');
     }
 
     /**

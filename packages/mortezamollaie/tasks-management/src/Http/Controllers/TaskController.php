@@ -10,6 +10,7 @@ use Mortezamollaie\TasksManagement\Http\Requests\TaskIndexRequest;
 use Mortezamollaie\TasksManagement\Http\Requests\TaskShowRequest;
 use Mortezamollaie\TasksManagement\Http\Requests\TaskStoreRequest;
 use Mortezamollaie\TasksManagement\Http\Requests\TaskUpdateRequest;
+use Mortezamollaie\TasksManagement\Http\Resources\TaskApiResource;
 use Mortezamollaie\TasksManagement\Http\Resources\TaskListApiResource;
 use Mortezamollaie\TasksManagement\Services\TaskService;
 
@@ -38,14 +39,14 @@ class TaskController extends Controller{
             return ApiResponse::withMessage('Something went wrong, try again later')->withData($result->data)->withStatus(500)->build()->response();
         }
 
-        return ApiResponse::withMessage('Task created successfully.')->withStatus(200)->withData($result->data)->build()->response();
+        return ApiResponse::withMessage('Task created successfully.')->withStatus(200)->withData(new TaskApiResource($result->data))->build()->response();
     }
 
     public function show(TaskShowRequest $request, $id)
     {
         $result = $this->taskService->getTask($id);
         if(!$result->ok){
-            return ApiResponse::withMessage('Something went wrong, try again later')->withData($result->data)->withStatus(500)->build()->response();
+            return ApiResponse::withMessage('Something went wrong, try again later')->withData(new TaskApiResource($result->data))->withStatus(500)->build()->response();
         }
 
         return ApiResponse::withData($result->data)->build()->response();
@@ -58,7 +59,7 @@ class TaskController extends Controller{
             return ApiResponse::withMessage('Something went wrong, try again later')->withData($result->data)->withStatus(500)->build()->response();
         }
 
-        return ApiResponse::withMessage('Task updated successfully.')->withStatus(200)->withData($result->data)->build()->response();
+        return ApiResponse::withMessage('Task updated successfully.')->withStatus(200)->withData(new TaskApiResource($result->data))->build()->response();
     }
 
     public function destroy(TaskDeleteRequest $request, $id)

@@ -14,6 +14,10 @@ class TaskApiResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'title' => $this->title,
+            'due_date' => $this->due_date,
+            'is_completed' => $this->is_completed == 0 ? 'false' : 'true',
+        ];
     }
 }
