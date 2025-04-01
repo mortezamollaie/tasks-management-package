@@ -3,9 +3,8 @@
 namespace Mortezamollaie\TasksManagement\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Mortezamollaie\TasksManagement\ApiResponse\ApiFormRequest;
 
-class TaskStoreRequest extends ApiFormRequest
+class TaskUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +22,10 @@ class TaskStoreRequest extends ApiFormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:255',
+            'title' => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'attachment' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:2048',
-            'due_date' => 'date|after_or_equal:now',
+            'due_date' => 'nullable|date|after_or_equal:now',
             'is_completed' => 'nullable|boolean',
         ];
     }
