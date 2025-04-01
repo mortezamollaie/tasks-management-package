@@ -2,16 +2,14 @@
 
 namespace Mortezamollaie\TasksManagement;
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Mortezamollaie\TasksManagement\ApiResponse\ApiResponseBuilder;
-use Mortezamollaie\TasksManagement\database\seeders\DatabaseSeeder;
+use Mortezamollaie\TasksManagement\Models\Permission;
 
 class TasksManagementServiceProvider extends ServiceProvider
 {
-    protected $seed_list = [
-      'Mortezamollaie/TasksManagement/database/seeders/DatabaseSeeder',
-    ];
     public function register()
     {
         $this->app->bind('apiResponse', function () {
@@ -31,5 +29,11 @@ class TasksManagementServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/database/seeders' => database_path('seeders'),
         ], 'seeders');
+
+        Permission::with('roles')->each(function ($permission) {
+            Gate::define($permission->name, function ($user) use ($permission) {
+                return !!$permission->roles->intersect($user->roles)->count();
+            });
+        });
     }
 }

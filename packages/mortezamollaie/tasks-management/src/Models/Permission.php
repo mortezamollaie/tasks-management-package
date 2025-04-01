@@ -9,7 +9,7 @@ use Mortezamollaie\TasksManagement\database\factories\PermissionFactory;
 
 class Permission extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $table = 'permissions';
 

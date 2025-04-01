@@ -1,0 +1,33 @@
+<?php
+
+namespace Mortezamollaie\TasksManagement\Http\Requests\Roles;
+
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
+use Mortezamollaie\TasksManagement\ApiResponse\ApiFormRequest;
+
+class RoleStoreRequest extends ApiFormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return Gate::allows('create_role');
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function rules(): array
+    {
+        return [
+            'name' => 'required|string|unique:roles,name',
+            'display_name' => 'required|string',
+            'permissions' => 'required|array',
+            'permissions.*' => 'exists:permissions,id'
+        ];
+    }
+}

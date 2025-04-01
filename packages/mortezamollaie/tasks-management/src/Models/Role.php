@@ -9,7 +9,7 @@ use Mortezamollaie\TasksManagement\database\factories\RoleFactory;
 
 class Role extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $table = 'roles';
 
