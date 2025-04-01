@@ -38,4 +38,11 @@ class TaskService
         });
     }
 
+    public function deleteTask(int $id)
+    {
+        return app(ServiceWrapper::class)(function() use ($id) {
+           Task::whereId($id)->delete();
+        });
+    }
+
 }

@@ -26,7 +26,7 @@ class TaskController extends Controller{
     {
         $result = $this->taskService->createTask($request->validated());
         if(!$result->ok){
-            return ApiResponse::withMessage('Something went wrong, try again later')->withStatus(500)->build()->response();
+            return ApiResponse::withMessage('Something went wrong, try again later')->withData($result->data)->withStatus(500)->build()->response();
         }
 
         return ApiResponse::withMessage('Task created successfully.')->withStatus(200)->withData($result->data)->build()->response();
@@ -36,7 +36,7 @@ class TaskController extends Controller{
     {
         $result = $this->taskService->getTask($id);
         if(!$result->ok){
-            return ApiResponse::withMessage('Something went wrong, try again later')->withStatus(500)->build()->response();
+            return ApiResponse::withMessage('Something went wrong, try again later')->withData($result->data)->withStatus(500)->build()->response();
         }
 
         return ApiResponse::withData($result->data)->build()->response();
@@ -50,5 +50,15 @@ class TaskController extends Controller{
         }
 
         return ApiResponse::withMessage('Task updated successfully.')->withStatus(200)->withData($result->data)->build()->response();
+    }
+
+    public function destroy($id)
+    {
+        $result = $this->taskService->deleteTask($id);
+        if(!$result->ok){
+            return ApiResponse::withMessage('Something went wrong, try again later')->withData($result->data)->withStatus(500)->build()->response();
+        }
+
+        return ApiResponse::withMessage('Task deleted successfully.')->withStatus(200)->build()->response();
     }
 }
