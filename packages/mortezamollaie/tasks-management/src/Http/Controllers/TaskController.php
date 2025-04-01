@@ -5,6 +5,9 @@ namespace Mortezamollaie\TasksManagement\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Mortezamollaie\TasksManagement\ApiResponse\Facades\ApiResponse;
+use Mortezamollaie\TasksManagement\Http\Requests\TaskDeleteRequest;
+use Mortezamollaie\TasksManagement\Http\Requests\TaskIndexRequest;
+use Mortezamollaie\TasksManagement\Http\Requests\TaskShowRequest;
 use Mortezamollaie\TasksManagement\Http\Requests\TaskStoreRequest;
 use Mortezamollaie\TasksManagement\Http\Requests\TaskUpdateRequest;
 use Mortezamollaie\TasksManagement\Http\Resources\TaskListApiResource;
@@ -18,7 +21,7 @@ class TaskController extends Controller{
         $this->taskService = $taskService;
     }
 
-    public function index(Request $request)
+    public function index(TaskIndexRequest $request)
     {
         $result = $this->taskService->getAllTask($request);
         if(!$result->ok){
@@ -38,7 +41,7 @@ class TaskController extends Controller{
         return ApiResponse::withMessage('Task created successfully.')->withStatus(200)->withData($result->data)->build()->response();
     }
 
-    public function show($id)
+    public function show(TaskShowRequest $request, $id)
     {
         $result = $this->taskService->getTask($id);
         if(!$result->ok){
@@ -58,7 +61,7 @@ class TaskController extends Controller{
         return ApiResponse::withMessage('Task updated successfully.')->withStatus(200)->withData($result->data)->build()->response();
     }
 
-    public function destroy($id)
+    public function destroy(TaskDeleteRequest $request, $id)
     {
         $result = $this->taskService->deleteTask($id);
         if(!$result->ok){

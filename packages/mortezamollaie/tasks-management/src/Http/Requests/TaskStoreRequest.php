@@ -3,6 +3,7 @@
 namespace Mortezamollaie\TasksManagement\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 use Mortezamollaie\TasksManagement\ApiResponse\ApiFormRequest;
 
 class TaskStoreRequest extends ApiFormRequest
@@ -12,7 +13,7 @@ class TaskStoreRequest extends ApiFormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Gate::allows('task_store');
     }
 
     /**
