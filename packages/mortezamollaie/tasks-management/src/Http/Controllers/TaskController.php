@@ -2,11 +2,12 @@
 
 namespace Mortezamollaie\TasksManagement\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Mortezamollaie\TasksManagement\ApiResponse\Facades\ApiResponse;
 use Mortezamollaie\TasksManagement\Http\Requests\TaskStoreRequest;
 use Mortezamollaie\TasksManagement\Http\Requests\TaskUpdateRequest;
-use Mortezamollaie\TasksManagement\Models\Task;
+use Mortezamollaie\TasksManagement\Http\Resources\TaskListApiResource;
 use Mortezamollaie\TasksManagement\Services\TaskService;
 
 class TaskController extends Controller{
@@ -17,9 +18,14 @@ class TaskController extends Controller{
         $this->taskService = $taskService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return 'index';
+        $result = $this->taskService->getAllTask($request);
+        if(!$result->ok){
+            return ApiResponse::withMessage('Something went wrong, try again later')->withData($result->data)->withStatus(500)->build()->response();
+        }
+
+        return ApiResponse::withStatus(200)->withData(TaskListApiResource::collection($result->data)->resource)->build()->response();
     }
 
     public function store(TaskStoreRequest $request)

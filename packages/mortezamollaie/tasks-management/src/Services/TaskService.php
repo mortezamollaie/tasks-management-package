@@ -7,6 +7,20 @@ use Mortezamollaie\TasksManagement\Models\Task;
 
 class TaskService
 {
+    public function getAllTask($request)
+    {
+        return app(ServiceWrapper::class)(function()use($request){
+            $query = Task::query();
+
+            if($request->has('is_completed')){
+                $isCompleted = filter_var($request->get('is_completed'), FILTER_VALIDATE_BOOLEAN);
+                $query->where('is_completed', $isCompleted);
+            }
+
+            return $query->paginate();
+        });
+    }
+
     public function createTask(array $data)
     {
         return app(ServiceWrapper::class)(function() use ($data){
