@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use App\ApiResponse\ApiFormRequest;
-use Illuminate\Foundation\Http\FormRequest;
 
 class LoginRequest extends ApiFormRequest
 {

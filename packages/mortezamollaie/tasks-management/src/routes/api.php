@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use Mortezamollaie\TasksManagement\ApiResponse\Facades\ApiResponse;
+use Mortezamollaie\TasksManagement\Http\Controllers\TaskController;
 
-Route::get('/test', function (){
-    return ApiResponse::withMessage("package works successfully")->build()->response();
-});
+Route::middleware('auth:sanctum')->apiResource('tasks', TaskController::class);
