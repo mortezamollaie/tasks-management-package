@@ -12,6 +12,7 @@ use Mortezamollaie\TasksManagement\Http\Requests\TaskStoreRequest;
 use Mortezamollaie\TasksManagement\Http\Requests\TaskUpdateRequest;
 use Mortezamollaie\TasksManagement\Http\Resources\TaskApiResource;
 use Mortezamollaie\TasksManagement\Http\Resources\TaskListApiResource;
+use Mortezamollaie\TasksManagement\Models\Task;
 use Mortezamollaie\TasksManagement\Services\TaskService;
 
 class TaskController extends Controller{
@@ -46,15 +47,15 @@ class TaskController extends Controller{
     {
         $result = $this->taskService->getTask($id);
         if(!$result->ok){
-            return ApiResponse::withMessage('Something went wrong, try again later')->withData(new TaskApiResource($result->data))->withStatus(500)->build()->response();
+            return ApiResponse::withMessage('Something went wrong, try again later')->withData($result->data)->withStatus(500)->build()->response();
         }
 
-        return ApiResponse::withData($result->data)->build()->response();
+        return ApiResponse::withData($result->data)->withStatus(200)->build()->response();
     }
 
-    public function update(TaskUpdateRequest $request, $id)
+    public function update(TaskUpdateRequest $request, Task $task)
     {
-        $result = $this->taskService->updateTask($id, $request->validated());
+        $result = $this->taskService->updateTask($task, $request->validated());
         if(!$result->ok){
             return ApiResponse::withMessage('Something went wrong, try again later')->withData($result->data)->withStatus(500)->build()->response();
         }

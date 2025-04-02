@@ -16,7 +16,7 @@ class AssignRoleController extends Controller
 
     public function __invoke(AssignRoleRequest $request, $id)
     {
-        $result = $this->assignRoleService->assignRolesToUser($id, $request->validated());
+        $result = $this->assignRoleService->assignRolesToUser($id, $request->validated()['roles']);
         if(!$result->ok){
             return ApiResponse::withMessage('Something went wrong, try again later')->withData($result->data)->withStatus(500)->build()->response();
         }

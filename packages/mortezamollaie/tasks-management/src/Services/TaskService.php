@@ -38,10 +38,9 @@ class TaskService
         });
     }
 
-    public function updateTask(int $id, array $data)
+    public function updateTask(Task $task, array $data)
     {
-        return app(ServiceWrapper::class)(function() use ($id, $data) {
-            $task = Task::findOrFail($id);
+        return app(ServiceWrapper::class)(function() use ($task, $data) {
             if (!empty($data['attachment'])) {
                 $path = $data['attachment']->store('uploads', 'public');
                 $data['attachment'] = $path;

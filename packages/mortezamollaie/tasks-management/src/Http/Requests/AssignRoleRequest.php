@@ -4,6 +4,7 @@ namespace Mortezamollaie\TasksManagement\Http\Requests;
 
 use App\ApiResponse\ApiFormRequest;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class AssignRoleRequest extends ApiFormRequest
 {
@@ -12,7 +13,7 @@ class AssignRoleRequest extends ApiFormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Gate::allows('assign_role');
     }
 
     /**

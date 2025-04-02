@@ -2,11 +2,14 @@
 
 namespace Mortezamollaie\TasksManagement;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Mortezamollaie\TasksManagement\ApiResponse\ApiResponseBuilder;
 use Mortezamollaie\TasksManagement\Models\Permission;
+use Mortezamollaie\TasksManagement\Models\Role;
+use Mortezamollaie\TasksManagement\Models\Task;
 
 class TasksManagementServiceProvider extends ServiceProvider
 {
@@ -19,6 +22,11 @@ class TasksManagementServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        Route::model('task', Task::class);
+        Route::model('role', Role::class);
+        Route::model('user', User::class);
+
+
         Route::prefix('api')
             ->group(function () {
                 $this->loadRoutesFrom(__DIR__ . '/routes/api.php');

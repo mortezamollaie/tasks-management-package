@@ -16,8 +16,6 @@ class AssignRoleService
                 return response()->json(['message' => 'Invalid role IDs format'], 400);
             }
 
-            $roleIds = array_map('intval', $roleIds);
-
             return $user->roles()->sync($roleIds);
         });
 
