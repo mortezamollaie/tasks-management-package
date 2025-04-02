@@ -7,7 +7,7 @@ The package also includes a role and permission system, allowing you to restrict
 
 ## Installation & Setup:
 
-To install and set up the package, first, place the **mortezamollaie** folder inside the **packages** directory of your Laravel project.
+To install and set up the package, first, place the **mortezamollaie** folder inside the **packages** directory of your Laravel project. (This folder is currently located in the **packages** directory.)
 
 Next, add the following configurations to your project's **config.json** file:
 ```
