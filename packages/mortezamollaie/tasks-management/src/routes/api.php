@@ -10,5 +10,5 @@ use Mortezamollaie\TasksManagement\Http\Controllers\TaskController;
 Route::middleware('auth:sanctum')->group(function (){
     Route::middleware('auth:sanctum')->apiResource('tasks', TaskController::class);
     Route::middleware('auth:sanctum')->apiResource('roles', RoleController::class);
-    Route::post('/user/{user}/assign-roles', AssignRoleController::class);
+    Route::post('/user/{id}/assign-roles', AssignRoleController::class);
 });

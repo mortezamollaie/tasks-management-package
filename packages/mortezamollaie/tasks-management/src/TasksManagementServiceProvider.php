@@ -25,10 +25,17 @@ class TasksManagementServiceProvider extends ServiceProvider
             });
 
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+        $this->loadViewsFrom(__DIR__ . '/resources/views', 'tasks-management');
 
         $this->publishes([
             __DIR__.'/database/seeders' => database_path('seeders'),
         ], 'seeders');
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                \Mortezamollaie\TasksManagement\Console\Commands\SendHighlightedTasksReminderCommand::class,
+            ]);
+        }
 
         Permission::with('roles')->each(function ($permission) {
             Gate::define($permission->name, function ($user) use ($permission) {
